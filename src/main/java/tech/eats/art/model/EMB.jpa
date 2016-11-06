@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="tech.eats.art.domain" v="2.6.4" sm="false" xs="false" id="_1478460991505214" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity xre="false" compositePrimaryKeyClass="EmployeePK" abs="false" class="Employee" visibile="true" minimized="false" rootElement="_1478460991505214" id="_1478460999664">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="firstName" id="_1478461006214217">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="lastName" id="_1478461010030218">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:element-collection collection-type="java.util.List" connected-class-id="_1478462529546" visibile="true" name="certificates" id="_1478462563256336">
+                <jpa:collection-table name="EMP_CERT"/>
+            </jpa:element-collection>
+            <jpa:embedded connected-class-id="_1478461033435" visibile="true" name="homeAddress" id="_1478461067737224">
+                <jpa:bv/>
+                <jpa:attribute-override name="city">
+                    <jpa:column name="HOME_CITY" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                </jpa:attribute-override>
+                <jpa:attribute-override name="country">
+                    <jpa:column name="HOME_COUNTRY" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                </jpa:attribute-override>
+                <jpa:attribute-override name="pinCode.code">
+                    <jpa:column name="HOME_CODE" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                </jpa:attribute-override>
+                <jpa:attribute-override name="pinCode.prefix">
+                    <jpa:column name="HOME_PREFIX" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                </jpa:attribute-override>
+                <jpa:attribute-override name="state">
+                    <jpa:column name="HOME_STATE" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                </jpa:attribute-override>
+                <jpa:attribute-override name="street">
+                    <jpa:column name="HOME_STREET" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                </jpa:attribute-override>
+            </jpa:embedded>
+            <jpa:embedded connected-class-id="_1478461033435" visibile="true" name="officeAddress" id="_1478461544980270">
+                <jpa:bv/>
+                <jpa:attribute-override name="city">
+                    <jpa:column name="OFC_CITY" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                </jpa:attribute-override>
+                <jpa:attribute-override name="country">
+                    <jpa:column name="OFC_COUNTRY" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                </jpa:attribute-override>
+                <jpa:attribute-override name="pinCode.code">
+                    <jpa:column name="OFC_CODE" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                </jpa:attribute-override>
+                <jpa:attribute-override name="pinCode.prefix">
+                    <jpa:column name="OFC_PREFIX" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                </jpa:attribute-override>
+                <jpa:attribute-override name="state">
+                    <jpa:column name="OFC_STATE" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                </jpa:attribute-override>
+                <jpa:attribute-override name="street">
+                    <jpa:column name="OFC_STREET" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                </jpa:attribute-override>
+            </jpa:embedded>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_1478460999665215">
+                <jpa:bv/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Employee.findAll">
+            <jpa:query>Select e from Employee e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Employee.findByFirstName">
+            <jpa:query>Select e from Employee e where e.firstName=:firstName</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Employee.findByLastName">
+            <jpa:query>Select e from Employee e where e.lastName=:lastName</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:embeddable abs="false" class="Address" visibile="true" minimized="false" rootElement="_1478460991505214" id="_1478461033435">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="street" id="_1478461043274220">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="city" id="_1478461046735221">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="state" id="_1478461050893222">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="country" id="_1478461055981223">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:embedded connected-class-id="_1478461760472" visibile="true" name="pinCode" id="_1478461772525298">
+                <jpa:bv/>
+            </jpa:embedded>
+        </jpa:attributes>
+    </jpa:embeddable>
+    <jpa:embeddable abs="false" class="PinCode" visibile="true" minimized="false" rootElement="_1478460991505214" id="_1478461760472">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="prefix" id="_1478461779150299">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="code" id="_1478461793201300">
+                <jpa:bv/>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:embeddable>
+    <jpa:embeddable abs="false" class="Certificate" visibile="true" minimized="false" rootElement="_1478460991505214" id="_1478462529546">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="name" id="_1478462540109334"/>
+            <jpa:basic attribute-type="String" visibile="true" name="issueDate" id="_1478462542595335"/>
+        </jpa:attributes>
+    </jpa:embeddable>
+    <jpa:snp e="true" loc="BEFORE_PACKAGE">/**
+ * This file was generated by the JPA Modeler
+ */</jpa:snp>
+    <jpa:c/>
+    <jpa:diagram>
+        <plane elementRef="_1478460991505214">
+            <shape elementRef="_1478460999664">
+                <Bounds x="253.0" y="286.0" width="156.0" height="185.0"/>
+            </shape>
+            <shape elementRef="_1478461033435">
+                <Bounds x="634.0" y="293.0" width="151.0" height="149.0"/>
+            </shape>
+            <shape elementRef="_1478461760472">
+                <Bounds x="940.0" y="646.0" width="151.0" height="76.0"/>
+            </shape>
+            <shape elementRef="_1478462529546">
+                <Bounds x="89.0" y="671.0" width="164.0" height="76.0"/>
+            </shape>
+        </plane>
+    </jpa:diagram>
+</jpa:entity-mappings>

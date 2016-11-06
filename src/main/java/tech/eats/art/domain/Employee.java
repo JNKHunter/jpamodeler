@@ -4,79 +4,60 @@
 package tech.eats.art.domain;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-import javax.persistence.Version;
 
 /**
  * @author John
  */
 @Entity
-@Table(name = "EMPLOYEE")
 public class Employee implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "FIRST_NAME")
     @Basic
     private String firstName;
 
-    @Column(name = "LAST_NAME")
     @Basic
     private String lastName;
 
-    @Column(name = "BIRTH_DATE")
-    @Basic
-    @Temporal(TemporalType.DATE)
-    private Date birthDate;
+    @ElementCollection
+    @CollectionTable(name = "EMP_CERT", joinColumns = {
+        @JoinColumn(name = "EMP_ID")})
+    private List<Certificate> certificates;
 
-    @Column(name = "GENDER")
-    @Basic
-    @Enumerated
-    private GenderType gender;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "city", column = @Column(name = "HOME_CITY"))
+        ,@AttributeOverride(name = "country", column = @Column(name = "HOME_COUNTRY"))
+        ,@AttributeOverride(name = "pinCode.code", column = @Column(name = "HOME_CODE"))
+        ,@AttributeOverride(name = "pinCode.prefix", column = @Column(name = "HOME_PREFIX"))
+        ,@AttributeOverride(name = "state", column = @Column(name = "HOME_STATE"))
+        ,@AttributeOverride(name = "street", column = @Column(name = "HOME_STREET"))})
+    private Address homeAddress;
 
-    @Basic
-    private boolean active;
-
-    @Column(name = "PROFILE_PIC")
-    @Lob
-    @Basic
-    private byte[] profilePic;
-
-    @OneToOne(optional = false, orphanRemoval = true, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, targetEntity = Cubicle.class)
-    @JoinColumn(name = "CUBICLE_ID")
-    private Cubicle assignedCubicle;
-
-    @ManyToMany(targetEntity = Project.class)
-    @JoinTable(joinColumns = {
-        @JoinColumn(name = "PROJECT_ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "EMPLOYEE_ID")})
-    private Map<String, Project> projects;
-
-    @Version
-    private long version;
-
-    @Transient
-    private String age;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "city", column = @Column(name = "OFC_CITY"))
+        ,@AttributeOverride(name = "country", column = @Column(name = "OFC_COUNTRY"))
+        ,@AttributeOverride(name = "pinCode.code", column = @Column(name = "OFC_CODE"))
+        ,@AttributeOverride(name = "pinCode.prefix", column = @Column(name = "OFC_PREFIX"))
+        ,@AttributeOverride(name = "state", column = @Column(name = "OFC_STATE"))
+        ,@AttributeOverride(name = "street", column = @Column(name = "OFC_STREET"))})
+    private Address officeAddress;
 
     public Long getId() {
         return this.id;
@@ -102,68 +83,28 @@ public class Employee implements Serializable {
         this.lastName = lastName;
     }
 
-    public Date getBirthDate() {
-        return this.birthDate;
+    public List<Certificate> getCertificates() {
+        return this.certificates;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setCertificates(List<Certificate> certificates) {
+        this.certificates = certificates;
     }
 
-    public GenderType getGender() {
-        return this.gender;
+    public Address getHomeAddress() {
+        return this.homeAddress;
     }
 
-    public void setGender(GenderType gender) {
-        this.gender = gender;
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
     }
 
-    public boolean isActive() {
-        return this.active;
+    public Address getOfficeAddress() {
+        return this.officeAddress;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public byte[] getProfilePic() {
-        return this.profilePic;
-    }
-
-    public void setProfilePic(byte[] profilePic) {
-        this.profilePic = profilePic;
-    }
-
-    public Cubicle getAssignedCubicle() {
-        return this.assignedCubicle;
-    }
-
-    public void setAssignedCubicle(Cubicle assignedCubicle) {
-        this.assignedCubicle = assignedCubicle;
-    }
-
-    public Map<String, Project> getProjects() {
-        return this.projects;
-    }
-
-    public void setProjects(Map<String, Project> projects) {
-        this.projects = projects;
-    }
-
-    public long getVersion() {
-        return this.version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
-    }
-
-    public String getAge() {
-        return this.age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
+    public void setOfficeAddress(Address officeAddress) {
+        this.officeAddress = officeAddress;
     }
 
 }
