@@ -62,9 +62,7 @@ public class Employee implements Serializable {
     private byte[] profilePic;
 
     @OneToOne(targetEntity = Cubicle.class)
-    @JoinTable(name = "EMP_CUBICLE", joinColumns = {
-        @JoinColumn(name = "CUB_ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "EMP_ID")})
+    @JoinColumn(name = "CUBICLE_ID")
     private Cubicle assignedCubicle;
 
     @ManyToMany(targetEntity = Project.class)

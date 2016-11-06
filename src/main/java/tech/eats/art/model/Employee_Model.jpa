@@ -28,14 +28,11 @@
             </jpa:basic>
             <jpa:basic attribute-type="byte[]" visibile="true" name="profilePic" id="_1478408462047204">
                 <jpa:bv/>
-                <jpa:column name="PROFILE_PIC" unique="false" nullable="true" insertable="true" updatable="true" length="255"/>
+                <jpa:column name="PROFILE_PIC" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
                 <jpa:lob/>
             </jpa:basic>
             <jpa:one-to-one own="true" orp="false" optional="true" primaryKey="false" connected-entity-id="_1478459744764" connected-attribute-id="_147845977436627" visibile="true" name="assignedCubicle" id="_147845977436526">
-                <jpa:join-table name="EMP_CUBICLE">
-                    <jpa:join-column name="CUB_ID" unique="false" nullable="true" insertable="true" updatable="true"/>
-                    <jpa:inverse-join-column name="EMP_ID" unique="false" nullable="true" insertable="true" updatable="true"/>
-                </jpa:join-table>
+                <jpa:join-column name="CUBICLE_ID" unique="false" nullable="true" insertable="true" updatable="true"/>
             </jpa:one-to-one>
             <jpa:many-to-many own="true" collection-type="java.util.List" connected-entity-id="_1478409826167" connected-attribute-id="_1478409852115248" visibile="true" name="projects" id="_1478409852110247">
                 <jpa:join-table>
@@ -43,12 +40,16 @@
                     <jpa:inverse-join-column name="EMPLOYEE_ID" unique="false" nullable="true" insertable="true" updatable="true"/>
                 </jpa:join-table>
             </jpa:many-to-many>
-            <jpa:transient attribute-type="String" visibile="true" name="age" id="_1478409797640241"/>
+            <jpa:transient attribute-type="String" visibile="true" name="age" id="_1478409797640241">
+                <jpa:bv/>
+            </jpa:transient>
             <jpa:id attribute-type="Long" visibile="true" name="id" id="_1478405561771115">
                 <jpa:bv/>
                 <jpa:generated-value strategy="AUTO"/>
             </jpa:id>
-            <jpa:version attribute-type="long" visibile="true" name="version" id="_1478409804141242"/>
+            <jpa:version attribute-type="long" visibile="true" name="version" id="_1478409804141242">
+                <jpa:bv/>
+            </jpa:version>
         </jpa:attributes>
         <jpa:nq e="false" name="Employee.findAll">
             <jpa:query>Select e from Employee e</jpa:query>
@@ -81,9 +82,12 @@
         <jpa:hc e="true"/>
         <jpa:eq e="true"/>
         <jpa:attributes>
-            <jpa:basic attribute-type="String" visibile="true" name="name" id="_1478409833394246"/>
+            <jpa:basic attribute-type="String" visibile="true" name="name" id="_1478409833394246">
+                <jpa:bv/>
+            </jpa:basic>
             <jpa:many-to-many collection-type="java.util.List" connected-entity-id="_1478405561770" connected-attribute-id="_1478409852110247" visibile="true" name="employees" id="_1478409852115248"/>
             <jpa:id attribute-type="Long" visibile="true" name="id" id="_1478409826167244">
+                <jpa:bv/>
                 <jpa:generated-value strategy="AUTO"/>
             </jpa:id>
         </jpa:attributes>
@@ -99,9 +103,12 @@
         <jpa:hc e="true"/>
         <jpa:eq e="true"/>
         <jpa:attributes>
-            <jpa:basic attribute-type="String" visibile="true" name="name" id="_147845982273153"/>
+            <jpa:basic attribute-type="String" visibile="true" name="name" id="_147845982273153">
+                <jpa:bv/>
+            </jpa:basic>
             <jpa:one-to-one orp="false" optional="true" primaryKey="false" connected-entity-id="_1478405561770" connected-attribute-id="_147845977436526" visibile="true" name="residentEmployee" id="_147845977436627"/>
             <jpa:id attribute-type="Long" visibile="true" name="id" id="_147845974476524">
+                <jpa:bv/>
                 <jpa:generated-value strategy="AUTO"/>
             </jpa:id>
         </jpa:attributes>
