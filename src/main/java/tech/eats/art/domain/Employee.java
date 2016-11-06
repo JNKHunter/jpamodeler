@@ -5,6 +5,7 @@ package tech.eats.art.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,10 +13,15 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 /**
  * @author John
@@ -53,6 +59,18 @@ public class Employee implements Serializable {
     @Lob
     @Basic
     private byte[] profilePic;
+
+    @ManyToMany(targetEntity = Project.class)
+    @JoinTable(joinColumns = {
+        @JoinColumn(name = "PROJECT_ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "EMPLOYEE_ID")})
+    private List<Project> projects;
+
+    @Version
+    private long version;
+
+    @Transient
+    private String age;
 
     public Long getId() {
         return this.id;
@@ -108,6 +126,30 @@ public class Employee implements Serializable {
 
     public void setProfilePic(byte[] profilePic) {
         this.profilePic = profilePic;
+    }
+
+    public List<Project> getProjects() {
+        return this.projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
+    public long getVersion() {
+        return this.version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
+
+    public String getAge() {
+        return this.age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 
 }
