@@ -12,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,7 +22,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "EMPLOYEE")
-public class EMPLOYEE implements Serializable {
+public class Employee implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,6 +45,14 @@ public class EMPLOYEE implements Serializable {
     @Basic
     @Enumerated
     private GenderType gender;
+
+    @Basic
+    private boolean active;
+
+    @Column(name = "PROFILE_PIC")
+    @Lob
+    @Basic
+    private byte[] profilePic;
 
     public Long getId() {
         return this.id;
@@ -83,6 +92,22 @@ public class EMPLOYEE implements Serializable {
 
     public void setGender(GenderType gender) {
         this.gender = gender;
+    }
+
+    public boolean isActive() {
+        return this.active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public byte[] getProfilePic() {
+        return this.profilePic;
+    }
+
+    public void setProfilePic(byte[] profilePic) {
+        this.profilePic = profilePic;
     }
 
 }
