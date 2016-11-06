@@ -5,8 +5,9 @@ package tech.eats.art.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -61,7 +62,7 @@ public class Employee implements Serializable {
     @Basic
     private byte[] profilePic;
 
-    @OneToOne(targetEntity = Cubicle.class)
+    @OneToOne(optional = false, orphanRemoval = true, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, targetEntity = Cubicle.class)
     @JoinColumn(name = "CUBICLE_ID")
     private Cubicle assignedCubicle;
 
@@ -69,7 +70,7 @@ public class Employee implements Serializable {
     @JoinTable(joinColumns = {
         @JoinColumn(name = "PROJECT_ID")}, inverseJoinColumns = {
         @JoinColumn(name = "EMPLOYEE_ID")})
-    private List<Project> projects;
+    private Map<String, Project> projects;
 
     @Version
     private long version;
@@ -141,11 +142,11 @@ public class Employee implements Serializable {
         this.assignedCubicle = assignedCubicle;
     }
 
-    public List<Project> getProjects() {
+    public Map<String, Project> getProjects() {
         return this.projects;
     }
 
-    public void setProjects(List<Project> projects) {
+    public void setProjects(Map<String, Project> projects) {
         this.projects = projects;
     }
 
