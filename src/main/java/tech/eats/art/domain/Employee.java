@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -59,6 +60,12 @@ public class Employee implements Serializable {
     @Lob
     @Basic
     private byte[] profilePic;
+
+    @OneToOne(targetEntity = Cubicle.class)
+    @JoinTable(name = "EMP_CUBICLE", joinColumns = {
+        @JoinColumn(name = "CUB_ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "EMP_ID")})
+    private Cubicle assignedCubicle;
 
     @ManyToMany(targetEntity = Project.class)
     @JoinTable(joinColumns = {
@@ -126,6 +133,14 @@ public class Employee implements Serializable {
 
     public void setProfilePic(byte[] profilePic) {
         this.profilePic = profilePic;
+    }
+
+    public Cubicle getAssignedCubicle() {
+        return this.assignedCubicle;
+    }
+
+    public void setAssignedCubicle(Cubicle assignedCubicle) {
+        this.assignedCubicle = assignedCubicle;
     }
 
     public List<Project> getProjects() {
